@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, :owned_post, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, :set_post, :owned_post, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -24,7 +24,13 @@ class PostsController < ApplicationController
       render :new
     end
   end
+def destroy
+  @comment = @post.comments.find(params[:id])
 
+  @comment.destroy
+  flash[:success] = "Comment deleted :("
+  redirect_to root_path
+end
   def edit
   end
 
