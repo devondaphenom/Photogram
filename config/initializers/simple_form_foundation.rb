@@ -94,10 +94,7 @@ SimpleForm.setup do |config|
     # b.use :hint,  wrap_with: { tag: :span, class: :hint }
   end
   
-  respond_to do |format|
-  format.html { redirect_to root_path }
-  format.js
-end
+ 
 
   # CSS class for buttons
   config.button_class = 'button'

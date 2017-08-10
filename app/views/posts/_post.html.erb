@@ -18,10 +18,25 @@
       </div>
       <% if post.comments %>
         <% post.comments.each do |comment| %>
-         <%= render post.comments, post: post %>
+          <div class="comment">
+            <div class="user-name">
+              <%= comment.user.user_name %>
+            </div>
+            <div class="comment-content">
+              <%= comment.content %>
+            </div>
+            <% if comment.user == current_user %>
+              <%= link_to post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure?" } do %>
+                <span>|Delete|</span>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
     <div class="comment-like-form row">
       <div class="like-button col-sm-1">
-        <span>(class="glyphicon glyphicon-heart-empty")</span>
+        <span></span>
       </div>
       <div class="comment-form col-sm-11">
         <%= form_for([post, post.comments.build], remote: true) do |f| %>
@@ -31,5 +46,3 @@
     </div>
   </div>
 </div>
- <% end %>
- <% end %>
